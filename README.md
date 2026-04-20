@@ -10,7 +10,7 @@ graph TD
     classDef sensor fill:#fef9e7,stroke:#fdcb6e,stroke-width:2px;
 
     %% Power Layer
-    subgraph Power_System ["⚡ Power Source"]
+    subgraph Power_System ["Power Source"]
         BATT["24x Molicel P30B 18650 Batteries"]:::power
     end
 
@@ -22,12 +22,12 @@ graph TD
     end
 
     %% Compute Layer
-    subgraph Host_Compute ["🧠 Brain"]
+    subgraph Host_Compute ["Brain"]
         JETSON["Nvidia Jetson Orin Nano (8GB)"]:::compute
     end
 
     %% Sensor Layer
-    subgraph Perception_Payload ["👁️ Sensors & Receivers"]
+    subgraph Perception_Payload ["Sensors & Receivers"]
         OAK["OAK Stereo Camera"]:::sensor
         LIDAR["D500 LiDAR"]:::sensor
         HACKRF["HackRF One + ANT500 Antenna"]:::sensor
@@ -35,18 +35,18 @@ graph TD
     end
 
     %% Connections - Power
-    BATT ==>|24V DC Array| PDB
-    PDB -.->|Internal Power| ESP
-    PDB -.->|Motor Voltages| MOTORS
-    PDB ==>|Regulated 5V/5A USB-C/DC| JETSON
+    BATT ==>|"24V DC Array"| PDB
+    PDB -.->|"Internal Power"| ESP
+    PDB -.->|"Motor Voltages"| MOTORS
+    PDB ==>|"Regulated 5V/5A USB-C/DC"| JETSON
 
     %% Connections - Data
-    ESP <==>|UART / USB Serial<br>(Twist Cmds & Odometry)| JETSON
-    ESP <-->|PWM / PID Control| MOTORS
+    ESP <==>|"UART / USB Serial<br>(Twist Cmds & Odometry)"| JETSON
+    ESP <-->|"PWM / PID Control"| MOTORS
 
     %% Connections - Sensors
-    OAK <==>|USB 3.0 / USB-C| JETSON
-    LIDAR <==>|USB (via UART adapter)| JETSON
-    HACKRF <==>|USB 2.0| JETSON
-    GPS <==>|I2C (Qwiic to 40-Pin GPIO)| JETSON
+    OAK <==>|"USB 3.0 / USB-C"| JETSON
+    LIDAR <==>|"USB (via UART adapter)"| JETSON
+    HACKRF <==>|"USB 2.0"| JETSON
+    GPS <==>|"I2C (Qwiic to 40-Pin GPIO)"| JETSON
 ```
