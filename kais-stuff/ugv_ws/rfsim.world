@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<sdf version="1.10">
+  <world name="rfsim">
+    <physics name="1ms" type="ignored"><max_step_size>0.004</max_step_size><real_time_factor>1.0</real_time_factor></physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <scene><ambient>0.6 0.6 0.6 1</ambient><background>0.7 0.8 0.9 1</background></scene>
+    <light type="directional" name="sun">
+      <cast_shadows>false</cast_shadows><direction>-0.4 0.3 -0.9</direction>
+      <diffuse>0.9 0.9 0.9 1</diffuse><specular>0.2 0.2 0.2 1</specular>
+    </light>
+    <model name="ground"><static>true</static><link name="l">
+      <collision name="c"><geometry><plane><normal>0 0 1</normal><size>700 700</size></plane></geometry></collision>
+      <visual name="v"><geometry><plane><normal>0 0 1</normal><size>700 700</size></plane></geometry>
+        <material><ambient>0.25 0.27 0.25 1</ambient><diffuse>0.3 0.32 0.3 1</diffuse></material></visual>
+    </link></model>
+    <model name="emitter">
+      <static>true</static>
+      <pose>-187.85 -177.65 0 0 0 0</pose>
+      <link name="l">
+        <visual name="pillar"><pose>0 0 25 0 0 0</pose>
+          <geometry><cylinder><radius>3</radius><length>50</length></cylinder></geometry>
+          <material><ambient>1 0.35 0 1</ambient><diffuse>1 0.45 0 1</diffuse><emissive>1 0.4 0 1</emissive></material>
+        </visual>
+        <visual name="ball"><pose>0 0 52 0 0 0</pose>
+          <geometry><sphere><radius>5</radius></sphere></geometry>
+          <material><ambient>1 0.85 0 1</ambient><diffuse>1 0.85 0 1</diffuse><emissive>1 0.75 0 1</emissive></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rover">
+      <pose>-56.95 17.85 0 0 0 0</pose>
+      <link name="chassis">
+        <pose>0 0 0.40 0 0 0</pose>
+        <inertial><mass>10.0</mass>
+          <inertia><ixx>0.9</ixx><iyy>2.2</iyy><izz>3.0</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+        </inertial>
+        <collision name="c"><geometry><box><size>1.6 1.0 0.3</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>1.6 1.0 0.3</size></box></geometry>
+          <material><ambient>0.1 0.4 0.8 1</ambient><diffuse>0.1 0.5 0.9 1</diffuse></material>
+        </visual>
+        <visual name="beacon"><pose>0 0 8 0 0 0</pose>
+          <geometry><cylinder><radius>0.7</radius><length>16</length></cylinder></geometry>
+          <material><ambient>0 0.8 1 1</ambient><diffuse>0 0.9 1 1</diffuse><emissive>0 0.7 1 1</emissive></material>
+        </visual>
+        <visual name="beacontop"><pose>0 0 16.5 0 0 0</pose>
+          <geometry><sphere><radius>1.6</radius></sphere></geometry>
+          <material><ambient>0 1 1 1</ambient><diffuse>0 1 1 1</diffuse><emissive>0 0.9 1 1</emissive></material>
+        </visual>
+      </link>
+      <link name="lw">
+        <pose>0 0.6 0.30 -1.5708 0 0</pose>
+        <inertial><mass>1.0</mass><inertia><ixx>0.03</ixx><iyy>0.03</iyy><izz>0.045</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <collision name="c"><surface><friction><ode><mu>1.5</mu><mu2>1.5</mu2></ode></friction></surface>
+          <geometry><cylinder><radius>0.30</radius><length>0.15</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.30</radius><length>0.15</length></cylinder></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient></material></visual>
+      </link>
+      <link name="rw">
+        <pose>0 -0.6 0.30 -1.5708 0 0</pose>
+        <inertial><mass>1.0</mass><inertia><ixx>0.03</ixx><iyy>0.03</iyy><izz>0.045</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <collision name="c"><surface><friction><ode><mu>1.5</mu><mu2>1.5</mu2></ode></friction></surface>
+          <geometry><cylinder><radius>0.30</radius><length>0.15</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.30</radius><length>0.15</length></cylinder></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient></material></visual>
+      </link>
+      <link name="caster">
+        <pose>-0.65 0 0.30 0 0 0</pose>
+        <inertial><mass>0.3</mass><inertia><ixx>0.005</ixx><iyy>0.005</iyy><izz>0.005</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <collision name="c"><surface><friction><ode><mu>0.0</mu><mu2>0.0</mu2></ode></friction></surface>
+          <geometry><sphere><radius>0.30</radius></sphere></geometry></collision>
+        <visual name="v"><geometry><sphere><radius>0.30</radius></sphere></geometry>
+          <material><ambient>0.2 0.2 0.2 1</ambient></material></visual>
+      </link>
+      <joint name="lwj" type="revolute"><parent>chassis</parent><child>lw</child>
+        <axis><xyz>0 1 0</xyz><limit><lower>-1e16</lower><upper>1e16</upper></limit></axis></joint>
+      <joint name="rwj" type="revolute"><parent>chassis</parent><child>rw</child>
+        <axis><xyz>0 1 0</xyz><limit><lower>-1e16</lower><upper>1e16</upper></limit></axis></joint>
+      <joint name="cj" type="ball"><parent>chassis</parent><child>caster</child></joint>
+
+      <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+        <left_joint>lwj</left_joint>
+        <right_joint>rwj</right_joint>
+        <wheel_separation>1.2</wheel_separation>
+        <wheel_radius>0.30</wheel_radius>
+        <topic>/model/rover/cmd_vel</topic>
+        <odom_topic>/model/rover/odometry</odom_topic>
+        <tf_topic>/model/rover/tf</tf_topic>
+        <frame_id>odom</frame_id>
+        <child_frame_id>rover</child_frame_id>
+        <odom_publish_frequency>30</odom_publish_frequency>
+        <max_linear_acceleration>3.0</max_linear_acceleration>
+      </plugin>
+    </model>
+    <gui fullscreen="0">
+      <plugin filename="MinimalScene" name="3D View">
+        <gz-gui>
+          <title>RF Seeker — live</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="string" key="state">docked</property>
+        </gz-gui>
+        <engine>ogre2</engine>
+        <scene>scene</scene>
+        <ambient_light>0.6 0.6 0.6</ambient_light>
+        <background_color>0.7 0.8 0.9</background_color>
+        <camera_pose>0 -210 320 0 0.95 1.5708</camera_pose>
+      </plugin>
+      <plugin filename="GzSceneManager" name="Scene Manager"/>
+      <plugin filename="InteractiveViewControl" name="Interactive view control"/>
+      <plugin filename="CameraTracking" name="Camera Tracking"/>
+      <plugin filename="MarkerManager" name="Marker manager"/>
+      <plugin filename="SelectEntities" name="Select entities"/>
+      <plugin filename="VisualizationCapabilities" name="Visualization capabilities"/>
+      <plugin filename="WorldControl" name="World control">
+        <gz-gui>
+          <title>World control</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="bool" key="resizable">false</property>
+          <property type="double" key="height">72</property>
+          <property type="double" key="width">121</property>
+          <property type="double" key="z">1</property>
+          <property type="string" key="state">floating</property>
+          <anchors target="3D View"><line own="left" target="left"/><line own="bottom" target="bottom"/></anchors>
+        </gz-gui>
+        <play_pause>true</play_pause>
+        <step>true</step>
+        <start_paused>false</start_paused>
+      </plugin>
+      <plugin filename="WorldStats" name="World stats">
+        <gz-gui>
+          <title>World stats</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="bool" key="resizable">false</property>
+          <property type="double" key="height">110</property>
+          <property type="double" key="width">290</property>
+          <property type="string" key="state">floating</property>
+          <anchors target="3D View"><line own="right" target="right"/><line own="bottom" target="bottom"/></anchors>
+        </gz-gui>
+        <sim_time>true</sim_time><real_time>true</real_time><real_time_factor>true</real_time_factor>
+      </plugin>
+    </gui>
+  </world>
+</sdf>
