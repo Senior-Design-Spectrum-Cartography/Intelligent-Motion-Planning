@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
-This repository contains the autonomous motion planning and hardware control stack for the **Intelligent Dynamic Spectrum Cartography** project, sponsored by the DEVCOM Army Research Laboratory. It coordinates a multi-agent system consisting of a primary Unmanned Ground Vehicle (UGV) and an adversarial OPFOR unit to track, locate, and map RF emitters in dynamic combat environments.
+This repository contains the autonomous motion planning and hardware control stack for the **Intelligent Dynamic Spectrum Cartography** project. It coordinates a multi-agent system consisting of a primary Unmanned Ground Vehicle (UGV) and an adversarial OPFOR unit to track, locate, and map RF emitters in dynamic combat environments.
 
 Instead of exhaustive physical sensing, this system utilizes the ROS 2 `Nav2` stack integrated with a custom RF Exploration Node. The UGV autonomously samples sparse RF data, passes it to an onboard neural network for spectrum map reconstruction, and dynamically updates its pathfinding goals to sample regions of highest uncertainty.
 
